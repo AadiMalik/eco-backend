@@ -16,6 +16,7 @@ class AuthController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
+        $user->role = 2;
         $user->save();
         return response()->json(['data'=>$user,'message' => 'User Register Successfully!', 'success' => true], 200);
     }
@@ -24,8 +25,10 @@ class AuthController extends Controller
     {
         $credentials = ['email' => $request->email, 'password' => $request->password];
         $user = Auth::attempt($credentials);
-        if (isset($user)) {
-            return response()->json(['data'=>$user,'message' => 'User Register Successfully!', 'success' => true], 200);
+        if ($user==true) {
+            return response()->json(['data'=> Auth()->user(),'message' => 'User Login Successfully!', 'success' => true], 200);
+        }else{
+            return response()->json(['data' => null, 'message' => 'Wrong!', 'success' => false], 200);
         }
     }
 }
