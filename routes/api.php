@@ -26,3 +26,6 @@ Route::post('login', [AuthController::class, 'login']);
 
 Route::get('list-products', [ProductController::class, 'index']);
 Route::post('add-product', [ProductController::class, 'store']);
+Route::get('edit-product/{id}', [ProductController::class, 'edit']);
+Route::post('update-product', [ProductController::class, 'update']);
+Route::get('delete-product/{id}', [ProductController::class, 'delete']);
