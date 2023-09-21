@@ -81,7 +81,11 @@ class BlogController extends Controller
 
     public function getByCategory($id)
     {
-        $blog = Blog::where('category_id',$id)->get();
+        if($id==0){
+            $blog = Blog::get();
+        }else{
+            $blog = Blog::where('category_id', $id)->get();
+        }
         return response()->json($blog);
     }
     public function getBlogBySearch(Request $request)

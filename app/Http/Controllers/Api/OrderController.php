@@ -74,6 +74,7 @@ class OrderController extends Controller
         $order->user_id = $request->user_id;
         $order->sub_total = $request->sub_total;
         $order->tax = $request->tax;
+        $order->discount = $request->discount;
         $order->delivery = $request->delivery;
         $order->total = $request->total;
         $order->status = 1;

@@ -4,7 +4,9 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\BlogController;
 use App\Http\Controllers\Api\CartController;
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\DashboardController;
 use App\Http\Controllers\Api\OrderController;
+use App\Http\Controllers\Api\OrderDetailController;
 use App\Http\Controllers\Api\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +29,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('register',[AuthController::class,'register']);
 Route::post('login', [AuthController::class, 'login']);
 
+
+Route::get('admin-dashboard', [DashboardController::class, 'index']);
+Route::get('user-dashboard', [DashboardController::class, 'userIndex']);
 
 Route::get('list-products', [ProductController::class, 'index']);
 Route::post('add-product', [ProductController::class, 'store']);
@@ -61,3 +66,6 @@ Route::get('list-order/{userId}', [OrderController::class, 'index']);
 Route::post('place-order', [OrderController::class, 'store']);
 Route::get('delete-order/{id}', [OrderController::class, 'destroy']);
 Route::get('status-order/{id}/{status_id}', [OrderController::class, 'status']);
+
+
+Route::get('order-detail/{order_id}', [OrderDetailController::class, 'index']);
