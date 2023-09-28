@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\DashboardController;
 use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\OrderDetailController;
 use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -69,3 +70,9 @@ Route::get('status-order/{id}/{status_id}', [OrderController::class, 'status']);
 
 
 Route::get('order-detail/{order_id}', [OrderDetailController::class, 'index']);
+
+Route::get('list-users', [UserController::class, 'index']);
+Route::post('add-user', [UserController::class, 'store']);
+Route::get('edit-user/{id}', [UserController::class, 'edit']);
+Route::post('update-user', [UserController::class, 'update']);
+Route::get('delete-user/{id}', [UserController::class, 'destroy']);

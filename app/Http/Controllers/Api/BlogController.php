@@ -48,28 +48,13 @@ class BlogController extends Controller
     }
     public function update(Request $request)
     {
-        $validation = Validator::make(
-            $request->all(),
-            [
-                'title' => 'required|max:255',
-                'category_id' => 'required',
-                'url' => 'required|url|max:1000',
-                'description' => 'required|max:1000',
-            ]
-        );
-        if ($validation->fails()) {
-            $validation_error = "";
-            foreach ($validation->errors()->all() as $message) {
-                $validation_error .= $message;
-            }
-            return response()->json(['data' => [], 'message' => $message, 'success' => false], 402);
-        }
+        
         $blog = Blog::find($request->id);
-        $blog->title = $request->title;
-        $blog->slug = \Str::slug($request->title);
-        $blog->category_id = $request->category_id;
-        $blog->url = $request->url;
-        $blog->description = $request->description;
+        $blog->title = $request->title?? $blog->title;
+        $blog->slug = \Str::slug($request->title?? $blog->title);
+        $blog->category_id = $request->category_id?? $blog->category_id;
+        $blog->url = $request->url?? $blog->url;
+        $blog->description = $request->description?? $blog->description;
         $blog->save();
         return response()->json(['data' => $blog, 'message' => 'Blog Updated Successfully!', 'success' => true], 200);
     }
